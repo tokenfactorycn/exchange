@@ -1,0 +1,11 @@
+.sc-exchange-Trade {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &__trading-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+}
