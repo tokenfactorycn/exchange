@@ -1,52 +1,52 @@
-import React from "react";
-import "./TradingHistory.scss";
-import { BEM } from "../utils/BEM";
+import React from "react"
+import "./TradingHistory.scss"
+import { BEM } from "../utils/BEM"
 
 export default function TradingHistory() {
-  const bem = new BEM("TradingHistory");
+  const bem = new BEM("TradingHistory")
 
   const DATA = [
     {
-      date: "24/08/2020 20:20:38",
-      fromAsset: "ETH",
-      fromAmount: 1.245,
-      toAsset: "XSTAR",
-      toAmount: 255.231,
-      gas: 1.52,
+      date: "-",
+      fromAsset: "-",
+      fromAmount: 0,
+      toAsset: "-",
+      toAmount: 0,
+      gas: 0,
     },
-    {
-      date: "24/08/2020 20:20:38",
-      fromAsset: "ETH",
-      fromAmount: 1.245,
-      toAsset: "XSTAR",
-      toAmount: 255.231,
-      gas: 1.52,
-    },
-    {
-      date: "24/08/2020 20:20:38",
-      fromAsset: "ETH",
-      fromAmount: 1.245,
-      toAsset: "XSTAR",
-      toAmount: 255.231,
-      gas: 1.52,
-    },
-    {
-      date: "24/08/2020 20:20:38",
-      fromAsset: "ETH",
-      fromAmount: 1.245,
-      toAsset: "XSTAR",
-      toAmount: 255.231,
-      gas: 1.52,
-    },
-    {
-      date: "24/08/2020 20:20:38",
-      fromAsset: "ETH",
-      fromAmount: 1.245,
-      toAsset: "XSTAR",
-      toAmount: 255.231,
-      gas: 1.52,
-    },
-  ];
+    // {
+    //   date: "23/08/2020 20:20:38",
+    //   fromAsset: "ETH",
+    //   fromAmount: 1.245,
+    //   toAsset: "XSTAR",
+    //   toAmount: 255.231,
+    //   gas: 1.52,
+    // },
+    // {
+    //   date: "22/08/2020 20:20:38",
+    //   fromAsset: "ETH",
+    //   fromAmount: 1.245,
+    //   toAsset: "XSTAR",
+    //   toAmount: 255.231,
+    //   gas: 1.52,
+    // },
+    // {
+    //   date: "21/08/2020 20:20:38",
+    //   fromAsset: "ETH",
+    //   fromAmount: 1.245,
+    //   toAsset: "XSTAR",
+    //   toAmount: 255.231,
+    //   gas: 1.52,
+    // },
+    // {
+    //   date: "20/08/2020 20:20:38",
+    //   fromAsset: "ETH",
+    //   fromAmount: 1.245,
+    //   toAsset: "XSTAR",
+    //   toAmount: 255.231,
+    //   gas: 1.52,
+    // },
+  ]
 
   return (
     <div className={bem.getClassName()}>
@@ -62,7 +62,7 @@ export default function TradingHistory() {
         )
       )}
     </div>
-  );
+  )
 
   function renderHistory(
     date: string,
@@ -73,7 +73,7 @@ export default function TradingHistory() {
     gas: number
   ) {
     return (
-      <div className={bem.getElement("single-history")}>
+      <div className={bem.getElement("single-history")} key={date}>
         <div className={bem.getElement("date-container")}>
           <p className={bem.getElement("container-name")}>Date</p>
           <p className={bem.getElement("container-value")}>{date}</p>
@@ -91,6 +91,6 @@ export default function TradingHistory() {
           <p className={bem.getElement("container-value")}>{gas}</p>
         </div>
       </div>
-    );
+    )
   }
 }

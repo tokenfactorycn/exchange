@@ -71,7 +71,7 @@ a {
   &__middle {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 3;
     justify-content: space-between;
     padding: 0 40px;
     margin: 0 40px;
@@ -79,7 +79,15 @@ a {
     border-right: 1px solid #e2e2e2;
   }
 
+  &__left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
   &__right {
+    display: flex;
+    flex: 1;
     // margin-left: auto;
   }
 }

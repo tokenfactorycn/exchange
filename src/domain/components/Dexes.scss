@@ -1,21 +1,27 @@
 .sc-exchange-Dexes {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: scroll;
+
   &__dex {
     display: flex;
     justify-content: space-between;
     padding: 15px 5px;
     border-bottom: 1px solid #ffbc0059;
-    min-width: 314px;
+    min-width: 240px;
   }
 
   &__icon-logo {
     width: 36px;
+    height: 36px;
     margin-right: 15px;
   }
 
   &__dex-icon-text {
     display: flex;
     flex-direction: row;
-    width: 130px;
+    width: 140px;
   }
 
   &__dex-info {

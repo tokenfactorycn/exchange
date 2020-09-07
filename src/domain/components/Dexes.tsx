@@ -1,75 +1,48 @@
-import React from "react";
-import "./Dexes.scss";
-import { BEM } from "../utils/BEM";
-import iconLogo from "../../assets/images/starcurve_256.png";
+import React from "react"
+import "./Dexes.scss"
+import { BEM } from "../utils/BEM"
+import iconLogo from "../../assets/images/starcurve_256.png"
+import placeholder from "../../assets/images/placeholder.png"
 
-export default function Dexes() {
-  const bem = new BEM("Dexes");
+const DATA = [
+  {
+    logo: iconLogo,
+    dex: "STARCURVE",
+    liquidity: 123.123,
+    gasFee: 0.88,
+  },
+]
 
-  const DATA = [
-    {
-      logo: iconLogo,
-      dex: "STARCURVE",
-      liquidity: 123.123,
-      gasFee: 0.88,
-    },
-    {
-      logo: iconLogo,
-      dex: "Market",
-      liquidity: 123.321,
-      gasFee: 1.02,
-    },
-    {
-      logo: iconLogo,
-      dex: "STARCURVE",
-      liquidity: 123.123,
-      gasFee: 0.88,
-    },
-    {
-      logo: iconLogo,
-      dex: "Market",
-      liquidity: 123.321,
-      gasFee: 1.02,
-    },
-    {
-      logo: iconLogo,
-      dex: "STARCURVE",
-      liquidity: 123.123,
-      gasFee: 0.88,
-    },
-    {
-      logo: iconLogo,
-      dex: "Market",
-      liquidity: 123.321,
-      gasFee: 1.02,
-    },
-    {
-      logo: iconLogo,
-      dex: "STARCURVE",
-      liquidity: 123.123,
-      gasFee: 0.88,
-    },
-    {
-      logo: iconLogo,
-      dex: "Market",
-      liquidity: 123.321,
-      gasFee: 1.02,
-    },
-  ];
+interface Props {
+  DEXes?: any
+}
+
+export const Dexes: React.FunctionComponent<Props> = ({ DEXes }) => {
+  const bem = new BEM("Dexes")
+  console.log(Object.values(DEXes).length)
 
   return (
     <div className={bem.getClassName()}>
       <h3>DEXes</h3>
-      {DATA.map((asset) => {
-        return renderAsset(
-          asset.logo,
-          asset.dex,
-          asset.liquidity,
-          asset.gasFee
-        );
-      })}
+      {Object.values(DEXes).length > 0
+        ? Object.values(DEXes.exchanges).map((asset: any) => {
+            return renderAsset(
+              asset.logo,
+              asset.name,
+              asset.liquidity,
+              asset.gasFee
+            )
+          })
+        : DATA.map((asset: any) => {
+            return renderAsset(
+              asset.logo,
+              asset.dex,
+              asset.liquidity,
+              asset.gasFee
+            )
+          })}
     </div>
-  );
+  )
 
   function renderAsset(
     logo: string,
@@ -78,16 +51,16 @@ export default function Dexes() {
     gasFee: number
   ) {
     return (
-      <div className={bem.getElement("dex")}>
+      <div className={bem.getElement("dex")} key={dex}>
         <div className={bem.getElement("dex-icon-text")}>
           <img
-            src={logo}
+            src={logo ? logo : placeholder}
             alt={"Coin logo"}
             className={bem.getElement("icon-logo")}
           />
           <div className={bem.getElement("dex-info")}>
             <p className={bem.getElement("dex-name")}>{dex}</p>
-            <p className={bem.getElement("liquidity")}>{liquidity}</p>
+            <p className={bem.getElement("liquidity")}>Liquidity</p>
           </div>
         </div>
         <div className={bem.getElement("gas-info")}>
@@ -95,9 +68,9 @@ export default function Dexes() {
           <p>${gasFee}</p>
         </div>
         <div className={bem.getElement("fee-difference")}>
-          <p className={bem.getElement("percentage")}>-0.23%</p>
+          <p className={bem.getElement("percentage")}>-</p>
         </div>
       </div>
-    );
+    )
   }
 }

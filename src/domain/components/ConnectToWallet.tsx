@@ -1,14 +1,29 @@
-import React from "react";
-import "./ConnectToWallet.scss";
-import { BEM } from "../utils/BEM";
+import React from "react"
+import "./ConnectToWallet.scss"
+import { BEM } from "../utils/BEM"
 
-export default function ConnectToWallet() {
-  const bem = new BEM("ConnectToWallet");
+interface Props {
+  disabled?: boolean
+}
+
+export const ConnectToWallet: React.FunctionComponent<Props> = ({
+  disabled,
+}) => {
+  const bem = new BEM("ConnectToWallet", () => ({
+    disabled: disabled,
+  }))
+  const connected = false
 
   return (
     <div className={bem.getClassName()}>
-      <p>$1,838,812.85</p>
-      <p className={bem.getElement("address")}>0x88…888</p>
+      {connected ? (
+        <>
+          <p>$1,838,812.85</p>
+          <p className={bem.getElement("address")}>0x88…888</p>
+        </>
+      ) : (
+        <p className={bem.getElement("not-connected")}>Connect your wallet</p>
+      )}
     </div>
-  );
+  )
 }

@@ -1,14 +1,18 @@
-import React from "react";
-import "./Trade.scss";
-import { BEM } from "../../utils/BEM";
-import { ChooseTradingAsset } from "./ChooseTradingAsset";
-import starcurveLogo from "../../../assets/images/starcurve_256.png";
-import ethIcon from "../../../assets/images/eth_logo.png";
-import AmountPerAsset from "./AmountPerAsset";
-import { Button } from "../core/Button";
+import React from "react"
+import "./Trade.scss"
+import { BEM } from "../../utils/BEM"
+import { ChooseTradingAsset } from "./ChooseTradingAsset"
+import starcurveLogo from "../../../assets/images/starcurve_256.png"
+import placeholder from "../../../assets/images/placeholder.png"
+import ethIcon from "../../../assets/images/eth_logo.png"
+import AmountPerAsset from "./AmountPerAsset"
+import { Button } from "../core/Button"
 
-export default function Trade() {
-  const bem = new BEM("Trade");
+interface Props {
+  toAsset: string
+}
+export const Trade: React.FunctionComponent<Props> = ({ toAsset }) => {
+  const bem = new BEM("Trade")
 
   return (
     <div className={bem.getClassName()}>
@@ -19,11 +23,18 @@ export default function Trade() {
         </div>
 
         <div className={bem.getElement("to")}>
-          <ChooseTradingAsset asset={"xstar"} logo={starcurveLogo} />
+          <ChooseTradingAsset
+            asset={toAsset ? toAsset : "XSTAR"}
+            logo={toAsset ? placeholder : starcurveLogo}
+          />
           <AmountPerAsset />
         </div>
       </div>
-      <Button title={"Buy XSTAR"} onClick={() => console.log("buying asset")} />
+      <Button
+        title={toAsset ? "Buy " + toAsset : "Buy XSTAR"}
+        onClick={() => console.log("buying asset")}
+        disabled={true}
+      />
     </div>
-  );
+  )
 }

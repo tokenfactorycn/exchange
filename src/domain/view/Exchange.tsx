@@ -1,19 +1,54 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
-import "./Exchange.scss";
-import { BEM } from "../utils/BEM";
-import Logo from "../components/Logo";
-import ConnectToWallet from "../components/ConnectToWallet";
-import blob_orange from "../../assets/images/background_blob_orange.png";
-import blob_yellow from "../../assets/images/background_blob_yellow.png";
-import Assets from "../components/Assets";
-import Dexes from "../components/Dexes";
-import Trade from "../components/trade/Trade";
-import TradingHistory from "../components/TradingHistory";
-import Chart from "../components/Chart";
+import React from "react"
+import "./Exchange.scss"
+import { BEM } from "../utils/BEM"
+import Logo from "../components/Logo"
+import { ConnectToWallet } from "../components/ConnectToWallet"
+import blob_orange from "../../assets/images/background_blob_orange.png"
+import blob_yellow from "../../assets/images/background_blob_yellow.png"
+import axios from "axios"
 
-export default class Exchange extends React.Component {
-  private bem = new BEM("Exchange");
+import TradingHistory from "../components/TradingHistory"
+
+import { Assets } from "../components/Assets"
+import { Trade } from "../components/trade/Trade"
+import { Chart } from "../components/Chart"
+import { Dexes } from "../components/Dexes"
+
+export interface Props {}
+
+export interface State {
+  assets: any
+  selectedToAsset: string
+  selectedFromAsset: string
+  buyAmount: number
+  quoteData: any
+}
+
+export default class Exchange extends React.Component<Props, State> {
+  private bem = new BEM("Exchange")
+
+  public state: State = {
+    assets: [],
+    selectedToAsset: "",
+    selectedFromAsset: "ETH",
+    buyAmount: 10,
+    quoteData: [],
+  }
+
+  componentDidMount() {
+    axios.get("https://api.1inch.exchange/v1.1/tokens").then(
+      (response) => {
+        // console.log(response.data)
+        this.setState({ assets: response.data })
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
+  }
+
+  componentDidUpdate() {}
 
   render() {
     return (
@@ -35,20 +70,50 @@ export default class Exchange extends React.Component {
           <div className={this.bem.getElement("content-container")}>
             <div className={this.bem.getElement("left")}>
               <Logo />
-              <ConnectToWallet />
-              <Assets />
+              <ConnectToWallet disabled={true} />
+              <Assets
+                assets={this.state.assets}
+                onClick={this.getCurrentAsset}
+              />
             </div>
             <div className={this.bem.getElement("middle")}>
-              <Chart />
+              <Chart currentAsset={this.state.selectedToAsset} />
               <TradingHistory />
-              <Trade />
+              <Trade toAsset={this.state.selectedToAsset} />
             </div>
             <div className={this.bem.getElement("right")}>
-              <Dexes />
+              <Dexes DEXes={this.state.quoteData} />
             </div>
           </div>
         </div>
       </div>
-    );
+    )
+  }
+
+  private getCurrentAsset = (asset: string) => {
+    this.setState(
+      {
+        selectedToAsset: asset,
+      },
+      () => {
+        const url =
+          "https://api.1inch.exchange/v1.1/quote?fromTokenSymbol=" +
+          this.state.selectedFromAsset +
+          "&toTokenSymbol=" +
+          this.state.selectedToAsset +
+          "&amount=" +
+          this.state.buyAmount
+
+        axios.get(url).then(
+          (response) => {
+            console.log(response.data)
+            this.setState({ quoteData: response.data })
+          },
+          (error) => {
+            console.log(error)
+          }
+        )
+      }
+    )
   }
 }

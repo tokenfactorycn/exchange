@@ -1,4 +1,7 @@
 .sc-exchange-Assets {
+  overflow: scroll;
+  cursor: pointer;
+
   &__asset {
     display: flex;
     justify-content: flex-start;
