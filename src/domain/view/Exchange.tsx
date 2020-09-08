@@ -73,6 +73,7 @@ export default class Exchange extends React.Component<Props, State> {
               <ConnectToWallet disabled={true} />
               <Assets
                 assets={this.state.assets}
+                selectedToAsset={this.state.selectedToAsset}
                 onClick={this.getCurrentAsset}
               />
             </div>
