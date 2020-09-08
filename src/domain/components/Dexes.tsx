@@ -50,14 +50,19 @@ export const Dexes: React.FunctionComponent<Props> = ({ DEXes }) => {
     liquidity: number,
     gasFee: number
   ) {
+    const dexLogo = "/dex_icons/" + dex + ".png"
+
     return (
       <div className={bem.getElement("dex")} key={dex}>
         <div className={bem.getElement("dex-icon-text")}>
-          <img
-            src={logo ? logo : placeholder}
-            alt={"Coin logo"}
-            className={bem.getElement("icon-logo")}
-          />
+          <div className={bem.getElement("icon-container")}>
+            <img
+              src={dexLogo}
+              onError={addDefaultSrc}
+              alt={"asset icon"}
+              className={bem.getElement("icon-logo")}
+            />
+          </div>
           <div className={bem.getElement("dex-info")}>
             <p className={bem.getElement("dex-name")}>{dex}</p>
             <p className={bem.getElement("liquidity")}>Liquidity</p>
@@ -72,5 +77,9 @@ export const Dexes: React.FunctionComponent<Props> = ({ DEXes }) => {
         </div>
       </div>
     )
+  }
+
+  function addDefaultSrc(ev: any) {
+    ev.target.src = "/dex_icons/placeholder.png"
   }
 }

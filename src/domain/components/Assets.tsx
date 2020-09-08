@@ -5,10 +5,15 @@ import { BEM } from "../utils/BEM"
 
 interface Props {
   assets: any
+  selectedToAsset: string
   onClick: (symbol: string) => void
 }
 
-export const Assets: React.FunctionComponent<Props> = ({ assets, onClick }) => {
+export const Assets: React.FunctionComponent<Props> = ({
+  assets,
+  onClick,
+  selectedToAsset,
+}) => {
   const bem = new BEM("Assets")
 
   const DATA = [
@@ -31,15 +36,17 @@ export const Assets: React.FunctionComponent<Props> = ({ assets, onClick }) => {
   return (
     <div className={bem.getClassName()}>
       <h3>Assets</h3>
-      {Object.values(assets).map((asset: any) => {
-        return renderAsset(
-          asset.logo,
-          asset.symbol,
-          asset.name,
-          asset.assetAmount,
-          asset.assetValue
-        )
-      })}
+      <div className={bem.getElement("asset-list")}>
+        {Object.values(assets).map((asset: any) => {
+          return renderAsset(
+            asset.logo,
+            asset.symbol,
+            asset.name,
+            asset.assetAmount,
+            asset.assetValue
+          )
+        })}
+      </div>
     </div>
   )
 
@@ -50,19 +57,24 @@ export const Assets: React.FunctionComponent<Props> = ({ assets, onClick }) => {
     amount: number,
     value: number
   ) {
+    const assetLogo = "/crypto_icons/" + symbol + "@2x.png"
+    const selected = symbol === selectedToAsset
+
     return (
       <div
-        className={bem.getElement("asset")}
+        className={bem.getElement("asset", () => ({
+          selected: selected,
+        }))}
         onClick={() => onClick(symbol)}
         key={symbol}
       >
-        {logo && (
-          <img
-            src={logo}
-            alt={"Coin logo"}
-            className={bem.getElement("icon-logo")}
-          />
-        )}
+        <img
+          src={assetLogo}
+          onError={addDefaultSrc}
+          alt={"Coin logo"}
+          className={bem.getElement("icon-logo")}
+        />
+
         <div className={bem.getElement("asset-name")}>
           <p className={bem.getElement("name-short")}>{symbol}</p>
           <p className={bem.getElement("name")}>{name}</p>
@@ -73,5 +85,9 @@ export const Assets: React.FunctionComponent<Props> = ({ assets, onClick }) => {
         </div>
       </div>
     )
+  }
+
+  function addDefaultSrc(ev: any) {
+    ev.target.src = "/crypto_icons/generic@2x.png"
   }
 }

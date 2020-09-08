@@ -12,15 +12,25 @@
     min-width: 240px;
   }
 
+  &__icon-container {
+    max-height: 38px;
+    width: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+  }
+
   &__icon-logo {
     width: 36px;
     height: 36px;
-    margin-right: 15px;
+    object-fit: contain;
   }
 
   &__dex-icon-text {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 140px;
   }
 

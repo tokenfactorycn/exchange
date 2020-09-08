@@ -39,14 +39,14 @@ export const Chart: React.FunctionComponent<Props> = ({ currentAsset }) => {
         <div className={bem.getElement("chart-timeframes")}>
           <div className={bem.getElement("timeframe")}>1m</div>
           <div className={bem.getElement("timeframe")}>5m</div>
-          <div className={bem.getElement("timeframe")}>15m</div>
+          {/* <div className={bem.getElement("timeframe")}>15m</div> */}
           <div className={bem.getElement("timeframe")}>30m</div>
           <div className={bem.getElement("timeframe")}>1h</div>
           <div className={bem.getElement("timeframe")}>2h</div>
           <div className={bem.getElement("timeframe")}>4h</div>
           <div className={bem.getElement("timeframe")}>12h</div>
           <div className={bem.getElement("timeframe")}>1d</div>
-          <div className={bem.getElement("timeframe")}>1w</div>
+          {/* <div className={bem.getElement("timeframe")}>1w</div> */}
         </div>
         <h3>{currentAsset ? currentAsset : "XSTAR"}</h3>
       </div>
