@@ -23,10 +23,7 @@ export const Trade: React.FunctionComponent<Props> = ({ toAsset }) => {
         </div>
 
         <div className={bem.getElement("to")}>
-          <ChooseTradingAsset
-            asset={toAsset ? toAsset : "XSTAR"}
-            logo={toAsset ? placeholder : starcurveLogo}
-          />
+          <ChooseTradingAsset asset={toAsset ? toAsset : "XSTAR"} />
           <AmountPerAsset />
         </div>
       </div>
