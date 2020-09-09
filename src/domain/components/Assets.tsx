@@ -57,7 +57,7 @@ export const Assets: React.FunctionComponent<Props> = ({
     amount: number,
     value: number
   ) {
-    const assetLogo = "/crypto_icons/" + symbol + "@2x.png"
+    const assetLogo = "/crypto_icons/" + symbol.toLowerCase() + "@2x.png"
     const selected = symbol === selectedToAsset
 
     return (

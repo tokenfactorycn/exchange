@@ -2,7 +2,6 @@ import React from "react"
 import "./Dexes.scss"
 import { BEM } from "../utils/BEM"
 import iconLogo from "../../assets/images/starcurve_256.png"
-import placeholder from "../../assets/images/placeholder.png"
 
 const DATA = [
   {
@@ -19,7 +18,6 @@ interface Props {
 
 export const Dexes: React.FunctionComponent<Props> = ({ DEXes }) => {
   const bem = new BEM("Dexes")
-  console.log(Object.values(DEXes).length)
 
   return (
     <div className={bem.getClassName()}>

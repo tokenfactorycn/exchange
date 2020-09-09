@@ -107,7 +107,6 @@ export default class Exchange extends React.Component<Props, State> {
 
         axios.get(url).then(
           (response) => {
-            console.log(response.data)
             this.setState({ quoteData: response.data })
           },
           (error) => {

@@ -14,7 +14,7 @@ export const ChooseTradingAsset: React.FunctionComponent<Props> = ({
 }) => {
   const bem = new BEM("ChooseTradingAsset")
   const assetBalance = 38912
-  const assetLogo = "/crypto_icons/" + asset + "@2x.png"
+  const assetLogo = "/crypto_icons/" + asset.toLowerCase() + "@2x.png"
 
   return (
     <div className={bem.getClassName()}>
