@@ -21,7 +21,7 @@ export const Dexes: React.FunctionComponent<Props> = ({ DEXes }) => {
 
   return (
     <div className={bem.getClassName()}>
-      <h3>DEXes</h3>
+      <h3>Exchanges</h3>
       {Object.values(DEXes).length > 0
         ? Object.values(DEXes.exchanges).map((asset: any) => {
             return renderAsset(
@@ -48,7 +48,7 @@ export const Dexes: React.FunctionComponent<Props> = ({ DEXes }) => {
     liquidity: number,
     gasFee: number
   ) {
-    const dexLogo = "/dex_icons/" + dex + ".png"
+    const dexLogo = "/dex_icons/" + dex.toLowerCase() + ".png"
 
     return (
       <div className={bem.getElement("dex")} key={dex}>
